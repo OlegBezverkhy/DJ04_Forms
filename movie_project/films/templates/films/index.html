@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+  <h1 class="text-center">Добро пожаловать в MovieApp</h1>
+  <div class="text-center mt-4">
+    <a href="{% url 'add_movie' %}" class="btn btn-primary">Внести информацию о новом фильме</a>
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary">Посмотреть введенную информацию о фильмах</a>
+  </div>
+{% endblock %}

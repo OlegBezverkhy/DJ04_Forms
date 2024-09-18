@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Список фильмов{% endblock %}
+
+{% block content %}
+  <h2 class="text-center mb-4">Список фильмов</h2>
+
+  <!-- Карточки с фильмами -->
+  <div class="row">
+    {% if page_obj.object_list %}
+      {% for movie in page_obj.object_list %}
+        <div class="col-md-12 mb-4">
+          <div class="card shadow-sm movie-card h-100">
+            <div class="card-header bg-primary text-white">
+              <h5 class="card-title mb-0">{{ movie.name }}</h5>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <p class="card-text flex-grow-1"><strong>Краткое описание:</strong>{{ movie.describe }}</p>
+              <p class="card-text"><strong>Отзыв:</strong> {{ movie.comment }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center">Записей о фильмах пока нет</p>
+    {% endif %}
+  </div>
+
+  <!-- Пагинация -->
+  <nav aria-label="pagination" class="d-flex justify-content-center mt-4">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% for i in page_obj.paginator.page_range %}
+        <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endblock %}

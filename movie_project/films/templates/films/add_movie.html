@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить фильм{% endblock %}
+
+{% block content %}
+  <h2 class="text-center">Введите информацию о фильме</h2>
+  <form method="POST" class="mt-4">
+    {% csrf_token%}
+    <div class="mb-3">
+      <label for="movieTitle" class="form-label">Название фильма</label>
+      {{form.name}}
+    </div>
+    <div class="mb-3">
+      <label for="movieDescription" class="form-label">Описание фильма</label>
+      {{form.describe}}
+    </div>
+    <div class="mb-3">
+      <label for="movieReview" class="form-label">Отзыв о фильме</label>
+      {{form.comment}}
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить фильм</button>
+  </form>
+<p>{{error}}</p>
+{% endblock %}
